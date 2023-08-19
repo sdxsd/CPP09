@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <stdexcept>
 
 BitcoinExchange::BitcoinExchange(std::ifstream& database) {
 	std::string	entry;
@@ -12,6 +11,20 @@ BitcoinExchange::BitcoinExchange(std::ifstream& database) {
 	}
 }
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& toCopy) {
+	_db = toCopy._db;
+}
+
 BitcoinExchange::~BitcoinExchange(void) {
-	_db.clear();
+	;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
+	if (this != &toCopy)
+		this->_db = toCopy._db;
+	return (*this);
+}
+
+void BitcoinExchange::parseInput(std::ifstream input) {
+
 }
