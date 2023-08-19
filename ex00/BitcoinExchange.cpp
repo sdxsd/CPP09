@@ -12,3 +12,7 @@ BitcoinExchange::BitcoinExchange(std::ifstream& database) {
 	for (const auto& [key, value] : _db)
 		std::cout << key << value;
 }
+
+BitcoinExchange::~BitcoinExchange(void) {
+	_db.clear();
+}

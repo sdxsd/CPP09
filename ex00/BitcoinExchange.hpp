@@ -15,10 +15,10 @@ class BitcoinExchange {
 		std::map<std::string, float> _db;
 	public:
 		BitcoinExchange(std::ifstream& database);
-		BitcoinExchange(const BitcoinExchange& toCopy);
+		// BitcoinExchange(const BitcoinExchange& toCopy);
 		~BitcoinExchange(void);
-		BitcoinExchange& operator=(const BitcoinExchange& toCopy);
-		void parseInput(std::ifstream input);
+		// BitcoinExchange& operator=(const BitcoinExchange& toCopy);
+		// void parseInput(std::ifstream input);
 };
 
 #endif // BITCOINEXCHANGE_H
