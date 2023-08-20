@@ -25,6 +25,12 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
 	return (*this);
 }
 
-void BitcoinExchange::parseInput(std::ifstream input) {
-
+void BitcoinExchange::parseInput(std::ifstream& input) {
+	std::string	entry;
+	if (!input.is_open())
+		throw std::invalid_argument("Invalid file stream");
+	std::getline(input, entry);
+	while (std::getline(input, entry)) {
+		;
+	}
 }

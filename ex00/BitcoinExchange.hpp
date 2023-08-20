@@ -18,7 +18,7 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange& toCopy);
 		~BitcoinExchange(void);
 		BitcoinExchange& operator=(const BitcoinExchange& toCopy);
-		void parseInput(std::ifstream input);
+		void parseInput(std::ifstream& input);
 };
 
 #endif // BITCOINEXCHANGE_H
