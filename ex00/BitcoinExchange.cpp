@@ -24,6 +24,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
 	return (*this);
 }
 
+// Sphaghetti Code :(
 void BitcoinExchange::parseInput(std::ifstream& input) {
 	std::string	entry;
 	std::string	date;
@@ -45,10 +46,10 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 					  << std::stof(value) * iter->second << std::endl;
 		}
 		else {
-			for (const auto& [date, exRate] : _db) {
-				if (date < Date(date))
+			for (const auto& [dbDate, exRate] : _db) {
+				if (dbDate < Date(date))
 					continue;
-				else if (date > Date(date)) {
+				else if (dbDate > Date(date)) {
 					auto iter = _db.find(oldDate);
 					std::cout << iter->first.dateString()
 							  << " =>"
