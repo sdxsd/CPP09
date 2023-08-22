@@ -29,7 +29,6 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 	std::string	entry;
 	Date		date;
 	float		value;
-	Date		oldDate;
 
 	if (!input.is_open())
 		throw std::invalid_argument("Invalid file stream");
