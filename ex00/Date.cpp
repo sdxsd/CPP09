@@ -115,7 +115,7 @@ bool Date::operator>(const Date& date) const {
 // Prefix
 Date& Date::operator++(void) {
 	++(this->_day);
-	if (this->_day > daysPerMonth[_month]) {
+	if (this->_day > daysPerMonth[_month - 1]) {
 		this->_day = 1;
 		++(this->_month);
 		if (this->_month > 12) {
@@ -140,7 +140,7 @@ Date& Date::operator--(void) {
 			this->_month = 12;
 			this->_year--;
 		}
-		this->_day = daysPerMonth[_month];
+		this->_day = daysPerMonth[_month - 1];
 	}
 	return (*this);
 }
