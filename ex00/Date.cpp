@@ -1,16 +1,26 @@
 #include "Date.hpp"
+#include <stdexcept>
 
 // Constructors & Destructors.
 
 Date::Date(const std::string& dateString) {
 	std::istringstream	stringStream(dateString);
 	std::string			splitStrings[3];
+	int					daysPerMonth[12] = {
+		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+	};
 
 	for (int i = 0; i < 3; i++)
 		std::getline(stringStream, splitStrings[i], '-');
 	_year = std::stoi(splitStrings[0]);
+	if (_year < 0)
+		throw std::invalid_argument("Invalid date: (year)");
 	_month = std::stoi(splitStrings[1]);
+	if (_month < 1 || _month > 12)
+		throw std::invalid_argument("Invalid date: (month)");
 	_day = std::stoi(splitStrings[2]);
+	if (_day > daysPerMonth[_month])
+		throw std::invalid_argument("Invalid date: (day)");
 }
 
 Date::Date(const Date& toCopy) {
@@ -44,6 +54,7 @@ bool Date::operator==(const Date& date) const {
 
 bool Date::operator==(const std::string& date) const {
 	Date convertedString(date);
+
 	if (convertedString == *this)
 		return (true);
 	return (false);
