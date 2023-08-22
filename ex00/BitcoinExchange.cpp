@@ -27,38 +27,30 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
 // Sphaghetti Code :(
 void BitcoinExchange::parseInput(std::ifstream& input) {
 	std::string	entry;
-	std::string	date;
-	std::string	value;
+	Date		date;
+	float		value;
 	Date		oldDate;
 
 	if (!input.is_open())
 		throw std::invalid_argument("Invalid file stream");
 	std::getline(input, entry);
 	while (std::getline(input, entry)) {
-		date = entry.substr(0, entry.find(" |"));
-		value = entry.substr(entry.find("|") + 1, entry.length());
+		date = Date(entry.substr(0, entry.find(" |")));
+		value = std::stof(entry.substr(entry.find("|") + 1, entry.length()));
 		auto iter = _db.find(Date(date));
 		if (iter != _db.end()) {
-			std::cout << iter->first.dateString()
-					  << " =>"
-					  << value
-					  << " = "
-					  << std::stof(value) * iter->second << std::endl;
+			std::cout << iter->first.dateString() << " =>" << value << " = "
+					  << value * iter->second << std::endl;
 		}
 		else {
-			for (const auto& [dbDate, exRate] : _db) {
-				if (dbDate < Date(date))
-					continue;
-				else if (dbDate > Date(date)) {
-					auto iter = _db.find(oldDate);
-					std::cout << iter->first.dateString()
-							  << " =>"
-							  << value
-							  << " = "
-							  << std::stof(value) * iter->second << std::endl;
-				}
-				oldDate = date;
-			}
+			auto dbIter = _db.find(--date);
+			while (dbIter == _db.end() && date != Date("1-1-1"))
+				auto dbIter = _db.find(--date);
+			if (date == Date("1-1-1"))
+				std::cout << "Unable to find entry in database." << std::endl;
+			else
+				std::cout << dbIter->first.dateString() << " =>" << value << " = "
+						  << value * dbIter->second << std::endl;
 		}
 	}
 }

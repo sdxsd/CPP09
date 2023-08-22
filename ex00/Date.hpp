@@ -9,7 +9,7 @@
 // :O
 class Date {
 	private:
-		const int					daysPerMonth[12] = {
+		const int	daysPerMonth[12] = {
 			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 		};
 		int _year;

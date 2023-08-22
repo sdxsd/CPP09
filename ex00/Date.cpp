@@ -121,6 +121,8 @@ Date& Date::operator++(void) {
 		if (this->_month > 12) {
 			this->_month = 1;
 			this->_year++;
+			if (this->_year > 9999)
+				this->_year = 0;
 		}
 	}
 	return (*this);
@@ -139,6 +141,8 @@ Date& Date::operator--(void) {
 		if (this->_month < 1) {
 			this->_month = 12;
 			this->_year--;
+			if (this->_year < 0)
+				this->_year = 9999;
 		}
 		this->_day = daysPerMonth[_month - 1];
 	}
