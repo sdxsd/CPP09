@@ -12,7 +12,7 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, float> _db;
+		std::map<t_date, float> _db;
 	public:
 		BitcoinExchange(std::ifstream& database);
 		BitcoinExchange(const BitcoinExchange& toCopy);

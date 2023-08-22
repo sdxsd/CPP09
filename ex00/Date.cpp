@@ -1,0 +1,100 @@
+#include "Date.hpp"
+
+// Constructors & Destructors.
+
+Date::Date(const std::string& dateString) {
+	std::istringstream	stringStream(dateString);
+	std::string			splitStrings[3];
+
+	for (int i = 0; i < 3; i++)
+		std::getline(stringStream, splitStrings[i], '-');
+	_year = std::stoi(splitStrings[0]);
+	_month = std::stoi(splitStrings[1]);
+	_day = std::stoi(splitStrings[2]);
+}
+
+Date::Date(const Date& toCopy) {
+	_year = toCopy._year;
+	_month = toCopy._month;
+	_day = toCopy._day;
+}
+
+Date::~Date(void) {
+	;
+}
+
+// Operators.
+
+Date& Date::operator=(const Date& toCopy) {
+	if (this != &toCopy) {
+		this->_year = toCopy._year;
+		this->_month = toCopy._month;
+		this->_day = toCopy._day;
+	}
+	return (*this);
+}
+
+bool Date::operator==(const Date& date) const {
+	if (this == &date)
+		return (true);
+	else if (this->_year == date._year && this->_month == date._month && this->_day == date._day)
+		return (true);
+	return (false);
+}
+
+bool Date::operator==(const std::string& date) const {
+	Date convertedString(date);
+	if (convertedString == *this)
+		return (true);
+	return (false);
+}
+
+bool Date::operator!=(const Date& date) const {
+	if (this == &date)
+		return (false);
+	else if (this->_year == date._year && this->_month == date._month && this->_day == date._day)
+		return (false);
+	return (true);
+}
+
+bool Date::operator<(const Date& date) const {
+	if (this->_year < date._year)
+		return (true);
+	if (this->_year == date._year)
+		;
+	else
+		return (false);
+	if (this->_month < date._month)
+		return (true);
+	else if (this->_month == date._month)
+		;
+	else
+		return (false);
+	if (this->_day < date._day)
+		return (true);
+	else if (this->_day == date._day)
+		return (false);
+	else
+		return (false);
+}
+
+bool Date::operator>(const Date& date) const {
+	if (this->_year > date._year)
+		return (true);
+	if (this->_year == date._year)
+		;
+	else
+		return (false);
+	if (this->_month > date._month)
+		return (true);
+	else if (this->_month == date._month)
+		;
+	else
+		return (false);
+	if (this->_day > date._day)
+		return (true);
+	else if (this->_day == date._day)
+		return (false);
+	else
+		return (false);
+}
