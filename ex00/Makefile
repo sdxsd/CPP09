@@ -2,6 +2,7 @@ NAME = btc
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++20
 FILES = \
+		Date.cpp \
 		BitcoinExchange.cpp \
 		main.cpp
 OFILES = $(FILES:.cpp=.o)

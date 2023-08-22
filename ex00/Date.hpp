@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <exception>
 
 // Fuck it, Date class.
 // :O
@@ -23,6 +24,8 @@ class Date {
 		bool operator!=(const Date& date) const;
 		bool operator<(const Date& date) const;
 		bool operator>(const Date& date) const;
+		// Methods.
+		void printDate(void) const;
 };
 
 #endif // DATE_H

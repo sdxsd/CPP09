@@ -6,9 +6,8 @@ BitcoinExchange::BitcoinExchange(std::ifstream& database) {
 	if (!database.is_open())
 		throw std::invalid_argument("Invalid file stream");
 	std::getline(database, entry);
-	while (std::getline(database, entry)) {
+	while (std::getline(database, entry))
 		_db[entry.substr(0, entry.find(','))] = std::stof(entry.substr(entry.find(',') + 1, entry.length()));
-	}
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& toCopy) {
@@ -32,6 +31,8 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 		throw std::invalid_argument("Invalid file stream");
 	std::getline(input, entry);
 	while (std::getline(input, entry)) {
+		auto iter = _db.find(Date(entry));
+		if (iter != _db.end())
 
 	}
 }

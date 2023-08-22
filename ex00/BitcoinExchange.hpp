@@ -6,13 +6,14 @@
 #include <string>
 #include <exception>
 #include <iostream>
+#include "Date.hpp"
 
 // Sidenote: I don't like the _variable standard for private variables.
 // Seems annoying...
 
 class BitcoinExchange {
 	private:
-		std::map<t_date, float> _db;
+		std::map<Date, float> _db;
 	public:
 		BitcoinExchange(std::ifstream& database);
 		BitcoinExchange(const BitcoinExchange& toCopy);

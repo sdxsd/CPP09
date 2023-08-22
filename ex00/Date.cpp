@@ -1,5 +1,6 @@
 #include "Date.hpp"
 #include <stdexcept>
+#include <iostream>
 
 // Constructors & Destructors.
 
@@ -19,7 +20,7 @@ Date::Date(const std::string& dateString) {
 	if (_month < 1 || _month > 12)
 		throw std::invalid_argument("Invalid date: (month)");
 	_day = std::stoi(splitStrings[2]);
-	if (_day > daysPerMonth[_month])
+	if (_day > daysPerMonth[_month - 1])
 		throw std::invalid_argument("Invalid date: (day)");
 }
 
@@ -108,4 +109,8 @@ bool Date::operator>(const Date& date) const {
 		return (false);
 	else
 		return (false);
+}
+
+void Date::printDate(void) const {
+	std::cout << _year << '-' << _month << '-' << _day << std::endl;
 }
