@@ -26,6 +26,7 @@ class Date {
 		bool operator>(const Date& date) const;
 		// Methods.
 		void printDate(void) const;
+		std::string	dateString(void) const;
 };
 
 #endif // DATE_H

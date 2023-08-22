@@ -114,3 +114,7 @@ bool Date::operator>(const Date& date) const {
 void Date::printDate(void) const {
 	std::cout << _year << '-' << _month << '-' << _day << std::endl;
 }
+
+std::string Date::dateString(void) const {
+	return (std::to_string(_year) + "-" + std::to_string(_month) + "-" + std::to_string(_day));
+}
