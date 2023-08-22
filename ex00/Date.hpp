@@ -9,6 +9,9 @@
 // :O
 class Date {
 	private:
+		const int					daysPerMonth[12] = {
+			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+		};
 		int _year;
 		int _month;
 		int _day;
@@ -25,6 +28,10 @@ class Date {
 		bool operator!=(const Date& date) const;
 		bool operator<(const Date& date) const;
 		bool operator>(const Date& date) const;
+		Date& operator++(void);
+		Date operator++(int);
+		Date& operator--(void);
+		Date operator--(int);
 		// Methods.
 		void printDate(void) const;
 		std::string	dateString(void) const;

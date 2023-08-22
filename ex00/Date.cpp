@@ -11,9 +11,6 @@ Date::Date(void) {
 Date::Date(const std::string& dateString) {
 	std::istringstream	stringStream(dateString);
 	std::string			splitStrings[3];
-	int					daysPerMonth[12] = {
-		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-	};
 
 	for (int i = 0; i < 3; i++)
 		std::getline(stringStream, splitStrings[i], '-');
@@ -113,6 +110,45 @@ bool Date::operator>(const Date& date) const {
 		return (false);
 	else
 		return (false);
+}
+
+// Prefix
+Date& Date::operator++(void) {
+	++(this->_day);
+	if (this->_day > daysPerMonth[_month]) {
+		this->_day = 1;
+		++(this->_month);
+		if (this->_month > 12) {
+			this->_month = 1;
+			this->_year++;
+		}
+	}
+	return (*this);
+}
+
+Date Date::operator++(int) {
+	Date result(*this);
+	++(*this);
+	return (result);
+}
+
+Date& Date::operator--(void) {
+	--(this->_day);
+	if (this->_day < 1) {
+		this->_month--;
+		if (this->_month < 1) {
+			this->_month = 12;
+			this->_year--;
+		}
+		this->_day = daysPerMonth[_month];
+	}
+	return (*this);
+}
+
+Date Date::operator--(int) {
+	Date result(*this);
+	--(*this);
+	return (result);
 }
 
 void Date::printDate(void) const {
