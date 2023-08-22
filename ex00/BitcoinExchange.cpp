@@ -24,7 +24,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
 	return (*this);
 }
 
-// Sphaghetti Code :(
+// Trust me it makes sense.
 void BitcoinExchange::parseInput(std::ifstream& input) {
 	std::string	entry;
 	Date		date;
@@ -43,14 +43,14 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 					  << value * iter->second << std::endl;
 		}
 		else {
-			auto dbIter = _db.find(--date);
-			while (dbIter == _db.end() && date != Date("1-1-1"))
-				dbIter = _db.find(--date);
+			iter = _db.find(--date);
+			while (iter == _db.end() && date != Date("1-1-1"))
+				iter = _db.find(--date);
 			if (date == Date("1-1-1"))
 				std::cout << "Unable to find entry in database." << std::endl;
 			else
-				std::cout << dbIter->first.dateString() << " => " << value << " = "
-						  << value * dbIter->second << std::endl;
+				std::cout << iter->first.dateString() << " => " << value << " = "
+						  << value * iter->second << std::endl;
 		}
 	}
 }
