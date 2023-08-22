@@ -26,8 +26,9 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& toCopy) {
 
 void BitcoinExchange::parseInput(std::ifstream& input) {
 	std::string	entry;
-	std::string date;
-	std::string value;
+	std::string	date;
+	std::string	value;
+	Date		oldDate;
 
 	if (!input.is_open())
 		throw std::invalid_argument("Invalid file stream");
@@ -44,7 +45,19 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 					  << std::stof(value) * iter->second << std::endl;
 		}
 		else {
-
+			for (const auto& [date, exRate] : _db) {
+				if (date < Date(date))
+					continue;
+				else if (date > Date(date)) {
+					auto iter = _db.find(oldDate);
+					std::cout << iter->first.dateString()
+							  << " =>"
+							  << value
+							  << " = "
+							  << std::stof(value) * iter->second << std::endl;
+				}
+				oldDate = date;
+			}
 		}
 	}
 }

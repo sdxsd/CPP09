@@ -4,6 +4,10 @@
 
 // Constructors & Destructors.
 
+Date::Date(void) {
+	_year = _month = _day = 0;
+}
+
 Date::Date(const std::string& dateString) {
 	std::istringstream	stringStream(dateString);
 	std::string			splitStrings[3];

@@ -14,6 +14,7 @@ class Date {
 		int _day;
 	public:
 		// Constructors & Destructors.
+		Date(void);
 		Date(const std::string& dateString);
 		Date(const Date& toCopy);
 		~Date(void);
