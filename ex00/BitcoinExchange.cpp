@@ -37,7 +37,14 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 		value = entry.substr(entry.find("|") + 1, entry.length());
 		auto iter = _db.find(Date(date));
 		if (iter != _db.end()) {
-			std::cout << iter->first.dateString() << " => " << value << " = " << std::stof(value) * iter->second;
+			std::cout << iter->first.dateString()
+					  << " =>"
+					  << value
+					  << " = "
+					  << std::stof(value) * iter->second << std::endl;
+		}
+		else {
+
 		}
 	}
 }
