@@ -8,11 +8,11 @@ int main(int argc, char *argv[]) {
 	std::ifstream dbFile("data.csv");
 	std::ifstream inputFile(argv[1]);
 	if (dbFile.fail()) {
-		std::cerr << "Failed to open database file." << std::endl;
+		std::cerr << "Error: could not open database file." << std::endl;
 		return (1);
 	}
 	else if (inputFile.fail()) {
-		std::cerr << "Failed to open input file." << std::endl;
+		std::cerr << "Error: could not open \"" << argv[1] << "\"" << std::endl;
 		return (1);
 	}
 	BitcoinExchange exchange(dbFile);

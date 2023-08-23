@@ -16,13 +16,13 @@ Date::Date(const std::string& dateString) {
 		std::getline(stringStream, splitStrings[i], '-');
 	_year = std::stoi(splitStrings[0]);
 	if (_year < 0)
-		throw std::invalid_argument("Invalid date: (year)");
+		_year = 0;
 	_month = std::stoi(splitStrings[1]);
 	if (_month < 1 || _month > 12)
-		throw std::invalid_argument("Invalid date: (month)");
+		_month = 0;
 	_day = std::stoi(splitStrings[2]);
 	if (_day > daysPerMonth[_month - 1])
-		throw std::invalid_argument("Invalid date: (day)");
+		_day = 0;
 }
 
 Date::Date(const Date& toCopy) {
@@ -153,6 +153,18 @@ Date Date::operator--(int) {
 	Date result(*this);
 	--(*this);
 	return (result);
+}
+
+int Date::getYear(void) const {
+	return (_year);
+}
+
+int Date::getMonth(void) const {
+	return (_month);
+}
+
+int Date::getDay(void) const {
+	return (_day);
 }
 
 void Date::printDate(void) const {

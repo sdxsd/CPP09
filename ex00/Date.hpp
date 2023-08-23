@@ -33,6 +33,9 @@ class Date {
 		Date& operator--(void);
 		Date operator--(int);
 		// Methods.
+		int getYear(void) const;
+		int getMonth(void) const;
+		int getDay(void) const;
 		void printDate(void) const;
 		std::string	dateString(void) const;
 };

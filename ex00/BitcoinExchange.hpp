@@ -6,6 +6,7 @@
 #include <string>
 #include <exception>
 #include <iostream>
+#include <limits>
 #include "Date.hpp"
 
 // Sidenote: I don't like the _variable standard for private variables.
@@ -14,6 +15,7 @@
 class BitcoinExchange {
 	private:
 		std::map<Date, float> _db;
+		bool _checkInput(const std::string& entry) const;
 	public:
 		BitcoinExchange(std::ifstream& database);
 		BitcoinExchange(const BitcoinExchange& toCopy);
