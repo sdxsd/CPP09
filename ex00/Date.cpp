@@ -12,8 +12,12 @@ Date::Date(const std::string& dateString) {
 	std::istringstream	stringStream(dateString);
 	std::string			splitStrings[3];
 
-	for (int i = 0; i < 3; i++)
-		std::getline(stringStream, splitStrings[i], '-');
+	for (int i = 0; i < 3; i++) {
+		if (!std::getline(stringStream, splitStrings[i], '-')) {
+			_year = 0;
+			return ;
+		}
+	}
 	_year = std::stoi(splitStrings[0]);
 	if (_year < 0)
 		_year = 0;

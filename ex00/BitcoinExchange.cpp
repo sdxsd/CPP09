@@ -1,18 +1,21 @@
 #include "BitcoinExchange.hpp"
+#include <stdexcept>
 
 bool BitcoinExchange::_checkInput(const std::string& entry) const {
-	Date date = Date(entry.substr(0, entry.find(" |")));
-	long value = std::stol(entry.substr(entry.find("|") + 1, entry.length()));
-	if (!date.getYear() || !date.getMonth() || !date.getDay()) {
-		std::cerr << "Error: bad input => " << entry.substr(0, entry.find(" |")) << std::endl;
-		return (false);
+	try {
+		Date date = Date(entry.substr(0, entry.find(" |")));
+		int value = std::stoi(entry.substr(entry.find("|") + 1, entry.length()));
+		if (!date.getYear() || !date.getMonth() || !date.getDay()) {
+			std::cerr << "Error: bad input => " << entry.substr(0, entry.find(" |")) << std::endl;
+			return (false);
+		}
+		if (value < 0) {
+			std::cerr << "Error: not a positive number." << std::endl;
+			return (false);
+		}
 	}
-	if (value < 0) {
-		std::cerr << "Error: not a positive number." << std::endl;
-		return (false);
-	}
-	else if (value > std::numeric_limits<int>::max()) {
-		std::cerr << "Error: too large a number." << std::endl;
+	catch (std::out_of_range& oor) {
+		std::cout << "Error: too large a number" << std::endl;
 		return (false);
 	}
 	return (true);
@@ -57,7 +60,7 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 			value = std::stof(entry.substr(entry.find("|") + 1, entry.length()));
 			auto iter = _db.find(date);
 			if (iter != _db.end()) {
-				std::cout << iter->first.dateString() << " => " << value << " = "
+				std::cout << entry.substr(0, entry.find(" |")) << " => " << value << " = "
 						  << value * iter->second << std::endl;
 			}
 			else {
@@ -67,7 +70,7 @@ void BitcoinExchange::parseInput(std::ifstream& input) {
 				if (date == Date("1-1-1"))
 					std::cout << "Unable to find entry in database." << std::endl;
 				else
-					std::cout << iter->first.dateString() << " => " << value << " = "
+					std::cout << entry.substr(0, entry.find(" |")) << " => " << value << " = "
 							  << value * iter->second << std::endl;
 
 			}

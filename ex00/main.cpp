@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]) {
 	if (argc != 2) {
-		std::cout << "Invalid arguments to program." << std::endl;
+		std::cout << "No file provided." << std::endl;
 		return (1);
 	}
 	std::ifstream dbFile("data.csv");
