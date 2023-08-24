@@ -18,6 +18,10 @@ bool BitcoinExchange::_checkInput(const std::string& entry) const {
 		std::cout << "Error: too large a number" << std::endl;
 		return (false);
 	}
+	catch (std::invalid_argument& ia) {
+		std::cout << "Error: invalid line => " << "\"" << entry  << "\"" << std::endl;
+		return (false);
+	}
 	return (true);
 }
 
