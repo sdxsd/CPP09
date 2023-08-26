@@ -4,6 +4,8 @@
 #include <stack>
 #include <string>
 #include <sstream>
+#include <limits>
+#include <iostream>
 
 enum operators {
 	PLUS,

@@ -2,8 +2,7 @@ NAME = RPN
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++20 -g
 FILES = \
-		Date.cpp \
-		BitcoinExchange.cpp \
+		RPN.cpp \
 		main.cpp
 OFILES = $(FILES:.cpp=.o)
 
