@@ -38,6 +38,11 @@ void combineAndPush(std::stack<int>& stack, int (*opFunc)(int, int)) {
 	stack.push(opFunc(topAndPop(stack), topAndPop(stack)));
 }
 
+int errReturn(void) {
+	std::cerr << "Error" << std::endl;
+	return (0);
+}
+
 int calculate(const std::string& expression) {
 	std::istringstream	stringStream(expression);
 	std::stack<int> 	stack;
@@ -45,18 +50,16 @@ int calculate(const std::string& expression) {
 
 	while (stringStream >> token) {
 		if (typeOperator(token) != INVALID) {
-			if (stack.size() < 2) {
-				std::cerr << "Error" << std::endl;
-				return (0);
-			}
+			if (stack.size() < 2)
+				return (errReturn());
 			combineAndPush(stack, operations[typeOperator(token)]);
 		}
 		else if (isdigit(token[0]) && stoll(token) < 10)
 			stack.push(stoi(token));
+		else
+			return (errReturn());
 	}
-	if (stack.size() != 1) {
-		std::cerr << "Error" << std::endl;
-		return (0);
-	}
+	if (stack.size() != 1)
+		return (errReturn());
 	return (stack.top());
 }
