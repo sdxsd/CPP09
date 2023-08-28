@@ -49,12 +49,9 @@ int calculate(const std::string& expression) {
 	std::string 		token;
 
 	while (stringStream >> token) {
-		if (typeOperator(token) != INVALID) {
-			if (stack.size() < 2)
-				return (errReturn());
+		if (typeOperator(token) != INVALID && stack.size() > 1)
 			combineAndPush(stack, operations[typeOperator(token)]);
-		}
-		else if (isdigit(token[0]) && stoll(token) < 10)
+		else if (isdigit(token[0]) && token.size() == 1)
 			stack.push(stoi(token));
 		else
 			return (errReturn());
