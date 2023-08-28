@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <cctype>
 
 int (*operations[4])(int x, int y) {
 	[](int x, int y) -> int {
@@ -8,19 +9,21 @@ int (*operations[4])(int x, int y) {
 		return (x - y);
 	},
 	[](int x, int y) -> int {
-		return (x / y);
+		return (x * y);
 	},
 	[](int x, int y) -> int {
-		return (x * y);
+		return (x / y);
 	}
 };
 
-operators isOperator(const std::string& token) {
+operators typeOperator(const std::string& token) {
+	if (token.size() != 1)
+		return (INVALID);
 	switch (token[0]) {
 		case '+': return (PLUS);
 		case '-': return (MINUS);
-		case '/': return (DIVIDED);
 		case '*': return (TIMES);
+		case '/': return (DIVIDED);
 	}
 	return (INVALID);
 }
@@ -36,17 +39,24 @@ void combineAndPush(std::stack<int>& stack, int (*opFunc)(int, int)) {
 }
 
 int calculate(const std::string& expression) {
-	std::istringstream stringStream(expression);
-	std::stack<int> stack;
-	std::string token;
+	std::istringstream	stringStream(expression);
+	std::stack<int> 	stack;
+	std::string 		token;
 
 	while (stringStream >> token) {
-		if (token.size() < 2 && isOperator(token) != INVALID)
-			combineAndPush(stack, operations[isOperator(token)]);
-		else if (stoi(token) < 10)
+		if (typeOperator(token) != INVALID) {
+			if (stack.size() < 2) {
+				std::cerr << "Error" << std::endl;
+				return (0);
+			}
+			combineAndPush(stack, operations[typeOperator(token)]);
+		}
+		else if (isdigit(token[0]) && stoll(token) < 10)
 			stack.push(stoi(token));
 	}
-	while (stack.size() > 0)
-		std::cout << topAndPop(stack) << std::endl;
-	return (0);
+	if (stack.size() != 1) {
+		std::cerr << "Error" << std::endl;
+		return (0);
+	}
+	return (stack.top());
 }
