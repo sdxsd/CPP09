@@ -17,8 +17,6 @@ int (*operations[4])(int x, int y) {
 };
 
 operators typeOperator(const std::string& token) {
-	if (token.size() != 1)
-		return (INVALID);
 	switch (token[0]) {
 		case '+': return (PLUS);
 		case '-': return (MINUS);
@@ -49,7 +47,7 @@ int calculate(const std::string& expression) {
 	std::string 		token;
 
 	while (stringStream >> token) {
-		if (typeOperator(token) != INVALID && stack.size() > 1)
+		if (typeOperator(token) != INVALID && stack.size() > 1 && token.size() == 1)
 			combineAndPush(stack, operations[typeOperator(token)]);
 		else if (isdigit(token[0]) && token.size() == 1)
 			stack.push(stoi(token));
