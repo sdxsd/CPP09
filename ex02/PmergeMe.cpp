@@ -1,9 +1,19 @@
 #include "PmergeMe.hpp"
 #include <iostream>
+#include <algorithm>
 
 std::vector<int> insertionSort(const std::vector<int>& numList) {
 	if (numList.size() <= 1)
 		return (numList);
+	std::vector<int> resultList = numList;
+	for (unsigned long i = 0; i < resultList.size(); i++) {
+		while ((i < resultList.size() - 1) && resultList[i] > resultList[i + 1]) {
+			std::cout << "swap: " << resultList[i] << " & " << resultList[i + 1] << std::endl;
+			std::swap(resultList[i], resultList[i + 1]);
+			i--;
+		}
+	}
+	return (resultList);
 }
 
 std::vector<int> mergeSort(const std::vector<int>& numList) {
