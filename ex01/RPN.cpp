@@ -1,5 +1,4 @@
 #include "RPN.hpp"
-#include <cctype>
 
 int (*operations[4])(int x, int y) {
 	[](int x, int y) -> int {
@@ -27,18 +26,13 @@ operators typeOperator(const std::string& token) {
 }
 
 int topAndPop(std::stack<int>& stack) {
-	int x = stack.top();
+	int	x = stack.top();
 	stack.pop();
 	return (x);
 }
 
 void combineAndPush(std::stack<int>& stack, int (*opFunc)(int, int)) {
 	stack.push(opFunc(topAndPop(stack), topAndPop(stack)));
-}
-
-int errReturn(void) {
-	std::cerr << "Error" << std::endl;
-	return (0);
 }
 
 int calculate(const std::string& expression) {
@@ -52,9 +46,9 @@ int calculate(const std::string& expression) {
 		else if (isdigit(token[0]) && token.size() == 1)
 			stack.push(stoi(token));
 		else
-			return (errReturn());
+			throw std::invalid_argument("Error");
 	}
 	if (stack.size() != 1)
-		return (errReturn());
+		throw std::invalid_argument("Error");
 	return (stack.top());
 }
