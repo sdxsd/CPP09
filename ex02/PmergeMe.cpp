@@ -8,7 +8,6 @@ std::vector<int> insertionSort(const std::vector<int>& numList) {
 	std::vector<int> resultList = numList;
 	for (unsigned long i = 0; i < resultList.size(); i++) {
 		while ((i < resultList.size() - 1) && resultList[i] > resultList[i + 1]) {
-			std::cout << "swap: " << resultList[i] << " & " << resultList[i + 1] << std::endl;
 			std::swap(resultList[i], resultList[i + 1]);
 			i--;
 		}

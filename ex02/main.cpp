@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main(void) {
-	std::vector<int> list = {12, 2, 23, 89, 11, 14};
+	std::vector<int> list = {12, 2};
 
 	std::vector<int> sortedList = insertionSort(list);
 	for (unsigned long i = 0; i < sortedList.size(); i++)
